@@ -1,37 +1,35 @@
 #!/usr/bin/env python3
-
-'''Task 1: FIFO caching
-'''
-
-
-from collections import OrderedDict
-from base_caching import BaseCaching
+"""BaseCaching module.
+"""
 
 
-class FIFOCache(BaseCaching):
-    '''A class `FIFOCache` that inherits from
-       `BaseCaching` and is a caching system.
-    '''
+class BaseCaching():
+    """BaseCaching defines:
+      - constants of your caching system
+      - where your data are stored (in a dictionary)
+    """
+    MAX_ITEMS = 4
 
     def __init__(self):
-        super().__init__()
-        self.cache_data = OrderedDict()
+        """Initiliazes the cache.
+        """
+        self.cache_data = {}
+
+    def print_cache(self):
+        """Prints the cache.
+        """
+        print("Current cache:")
+        for key in sorted(self.cache_data.keys()):
+            print("{}: {}".format(key, self.cache_data.get(key)))
 
     def put(self, key, item):
-        '''assign to the dictionary `self.cache_data` the
-           `item` value for the key `key`
-        '''
-
-        if key is None or item is None:
-            return
-
-        if len(self.cache_data) > BaseCaching.MAX_ITEMS:
-            first_key, _ = self.cache_data.popitem(last=False)
-            print(f"DISCARD: {first_key}")
-
-        self.cache_data[key] = item
+        """Adds an item in the cache.
+        """
+        error_msg = "put must be implemented in your cache class"
+        raise NotImplementedError(error_msg)
 
     def get(self, key):
-        '''return the value in `self.cache_data` linked to `key`
-        '''
-        return self.cache_data.get(key, None)
+        """Retrieves an item by key.
+        """
+        error_msg = "get must be implemented in your cache class"
+        raise NotImplementedError(error_msg)
